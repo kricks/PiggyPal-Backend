@@ -6,7 +6,7 @@ import logger from 'morgan';
 import cors from 'cors';
 
 // Import your router (make sure the router file is converted to TS too)
-import guineaPigRouter from './routes/guinea-pigs';
+import guineaPigRouter from './src/routes/guinea-pigs';
 
 const app: Application = express();
 
