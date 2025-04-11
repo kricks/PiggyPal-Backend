@@ -19,8 +19,8 @@ const router = Router();
 
 router.get('/', guineaPigController.getAllGuineaPigs);
 router.get('/:id', guineaPigController.getGuineaPigById);
-router.post('/', authMiddleware, validate(createGuineaPigSchema), guineaPigController.createGuineaPig);
+router.post('/create', authMiddleware, validate(createGuineaPigSchema), guineaPigController.createGuineaPig);
 router.put('/:id', authMiddleware, validate(updateGuineaPigSchema), guineaPigController.updateGuineaPig);
-router.delete('/:id', authMiddleware, guineaPigController.deleteGuineaPig);
+router.delete('delete/:id', authMiddleware, guineaPigController.deleteGuineaPig);
 
 export default router;
