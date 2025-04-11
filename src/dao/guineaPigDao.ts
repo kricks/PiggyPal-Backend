@@ -1,4 +1,4 @@
-import pool  from '../../db.config';
+import pool  from '../db.config';
 import { GuineaPig } from '../models/GuineaPig';
 
 const guineaPigDao = {
