@@ -19,11 +19,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(process.cwd(), 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/guinea-pig', guineaPigRouter);
+app.use('/guinea-pigs', guineaPigRouter);
 
-// catch 404 and forward to error handler
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to PiggyPal Backend! hello');
+});
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
