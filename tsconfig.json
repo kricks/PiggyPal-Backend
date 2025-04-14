@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "Commonjs",
+    "rootDir": "./src",        // Your source code is all here.
+    "outDir": "./dist",        // Compiled files go here.
+    "moduleResolution": "node", // Ensures Node resolution (this is usually the default).
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
