@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import guineaPigService from '../services/guineaPigService';
 
 const guineaPigController = {
@@ -6,8 +6,8 @@ const guineaPigController = {
     try {
       const pigs = await guineaPigService.getAllGuineaPigs();
       res.status(200).json(pigs);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch guinea pigs' });
+    } catch (error: unknown) {
+      next(error);
     }
   },
 
@@ -20,7 +20,7 @@ const guineaPigController = {
         res.status(404).json({ message: 'Guinea pig not found' });
       }
     } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch guinea pig' });
+      next(error);
     }
   },
 
@@ -29,7 +29,7 @@ const guineaPigController = {
       const pig = await guineaPigService.createGuineaPig(req.body);
       res.status(201).json(pig);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to create guinea pig' });
+      next(error);
     }
   },
 
@@ -42,7 +42,7 @@ const guineaPigController = {
         res.status(404).json({ message: 'Guinea pig not found' });
       }
     } catch (error) {
-      res.status(500).json({ error: 'Failed to update guinea pig' });
+      next(error);
     }
   },
 
@@ -55,9 +55,13 @@ const guineaPigController = {
         res.status(404).json({ message: 'Guinea pig not found' });
       }
     } catch (error) {
-      res.status(500).json({ error: 'Failed to delete guinea pig' });
+      next(error);
     }
   },
 };
 
 export default guineaPigController;
+
+function next(error: unknown) {
+  throw new Error('Function not implemented.');
+}

@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 // Import your router (make sure the router file is converted to TS too)
 import guineaPigRouter from './routes/guinea-pigs';
+import { errorHandler } from './middleware/errorHandler';
 
 const app: Application = express();
 
@@ -21,27 +22,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(process.cwd(), 'public')));
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/guinea-pigs', guineaPigRouter);
+app.use(errorHandler);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to PiggyPal Backend! hello');
 });
 
+// Catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 
-// error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+// Centralized error handling middleware (registered as the last middleware)
+app.use(errorHandler);
 
 export default app;
