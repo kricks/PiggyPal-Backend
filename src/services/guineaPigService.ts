@@ -1,5 +1,6 @@
 import guineaPigDao from '../dao/guineaPigDao';
 import { GuineaPig } from '../models/GuineaPig';
+import { parseDate } from '../utilities/conversions';
 
 const guineaPigService = {
   getAllGuineaPigs: async (): Promise<GuineaPig[]> => {
@@ -11,11 +12,21 @@ const guineaPigService = {
   },
 
   createGuineaPig: async (data: Omit<GuineaPig, 'id' | 'createdAt' | 'updatedAt'>): Promise<GuineaPig> => {
-    return await guineaPigDao.createGuineaPig(data);
+    const preparedData = {
+      ...data,
+      dob: parseDate(data.dob),
+      approx_dob: parseDate(data.approxDob),
+    };
+    return await guineaPigDao.createGuineaPig(preparedData);
   },
 
   updateGuineaPig: async (id: number, data: Omit<GuineaPig, 'id' | 'createdAt' | 'updatedAt'>): Promise<GuineaPig | null> => {
-    return await guineaPigDao.updateGuineaPig(id, data);
+    const updatedData = {
+      ...data,
+      dob: parseDate(data.dob),
+      approx_dob: parseDate(data.approxDob),
+    }
+    return await guineaPigDao.updateGuineaPig(id, updatedData);
   },
 
   deleteGuineaPig: async (id: number): Promise<boolean> => {

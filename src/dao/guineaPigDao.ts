@@ -23,8 +23,8 @@ const guineaPigDao = {
     createGuineaPig: async (guineaPig: Omit<GuineaPig, 'id' | 'createdAt' | 'updatedAt'>): Promise<GuineaPig> => {
       try {
         const { rows } = await pool.query(
-          'INSERT INTO guinea_pigs (name, breed, age) VALUES ($1, $2, $3) RETURNING *',
-          [guineaPig.name, guineaPig.breed, guineaPig.dob, guineaPig.apprxDob]
+          'INSERT INTO guinea_pigs (name, breed, dob, approx_dob) VALUES ($1, $2, $3, $4) RETURNING *',
+          [guineaPig.name, guineaPig.breed, guineaPig.dob, guineaPig.approxDob]
         );
         return rows[0];
       } catch (error) {
@@ -35,8 +35,8 @@ const guineaPigDao = {
     updateGuineaPig: async (id: number, guineaPig: Omit<GuineaPig, 'id' | 'createdAt' | 'updatedAt'>): Promise<GuineaPig | null> => {
       try {
         const { rows } = await pool.query(
-          'UPDATE guinea_pigs SET name = $1, breed = $2, age = $3, updated_at = NOW() WHERE id = $4 RETURNING *',
-          [guineaPig.name, guineaPig.breed, guineaPig.dob, guineaPig.apprxDob, id]
+          'UPDATE guinea_pigs SET name = $1, breed = $2, dob = $3, approx_dob = $4, updated_at = NOW() WHERE id = $5 RETURNING *',
+          [guineaPig.name, guineaPig.breed, guineaPig.dob, guineaPig.approxDob, id]
         );
         return rows.length > 0 ? rows[0] : null;
       } catch (error) {

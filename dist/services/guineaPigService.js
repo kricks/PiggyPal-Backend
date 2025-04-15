@@ -12,10 +12,18 @@ const guineaPigService = {
         return await guineaPigDao_1.default.getGuineaPigById(id);
     },
     createGuineaPig: async (data) => {
-        return await guineaPigDao_1.default.createGuineaPig(data);
+        const preparedData = {
+            ...data,
+            dob: data.dob ? new Date(data.dob) : null,
+        };
+        return await guineaPigDao_1.default.createGuineaPig(preparedData);
     },
     updateGuineaPig: async (id, data) => {
-        return await guineaPigDao_1.default.updateGuineaPig(id, data);
+        const updatedData = {
+            ...data,
+            dob: data.dob ? new Date(data.dob) : null,
+        };
+        return await guineaPigDao_1.default.updateGuineaPig(id, updatedData);
     },
     deleteGuineaPig: async (id) => {
         return await guineaPigDao_1.default.deleteGuineaPig(id);

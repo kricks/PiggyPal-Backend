@@ -5,10 +5,13 @@
  */
 
 // Use a flag to check if we're in development mode
+console.log("NODE_ENV:", process.env.NODE_ENV);
+
 const isDev = process.env.NODE_ENV !== 'production';
 
 // Depending on the mode, load app from source or built files
 var app = require(isDev ? '../src/app' : '../dist/app').default;
+
 
 var debug = require('debug')('piggypal-backend:server');
 var http = require('http');

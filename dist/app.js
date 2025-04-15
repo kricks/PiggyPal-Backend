@@ -9,6 +9,8 @@ const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 // Import your router (make sure the router file is converted to TS too)
 const guinea_pigs_1 = __importDefault(require("./routes/guinea-pigs"));
 const app = (0, express_1.default)();

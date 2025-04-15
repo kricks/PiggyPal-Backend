@@ -4,7 +4,9 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
 // Import your router (make sure the router file is converted to TS too)
 import guineaPigRouter from './routes/guinea-pigs';
 
@@ -13,7 +15,6 @@ const app: Application = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
